@@ -48,7 +48,7 @@ namespace Worm
            TryClearTween();
 
             currentTween = transform
-                .DOMove(safePosition, hideDuration)
+                .DOLocalMove(safePosition, hideDuration)
                 .SetEase(Ease.Linear)
                 .OnComplete(() => currentTween = null);
         }
@@ -62,7 +62,7 @@ namespace Worm
             TryClearTween();
 
             currentTween = transform
-                .DOMove(Vector3.zero, unHideDuration)
+                .DOLocalMove(Vector3.zero, unHideDuration)
                 .SetEase(Ease.Linear)
                 .OnComplete(() => currentTween = null);
         }

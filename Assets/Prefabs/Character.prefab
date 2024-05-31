@@ -220,6 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dc3f23c14fc29b4991d2ccfaba9ca92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wormName: 
   health: {fileID: 6950468895550862790}
   stamina: {fileID: 5929221868822249113}
   hideDuration: 0.1
@@ -249,9 +250,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 295cd3663de7c3b409573226c8ababc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxStamina: 0
-  depleteDuration: 0
-  recoverDuration: 0
+  maxStamina: 100
+  depleteDuration: 2
+  recoverDuration: 4
 --- !u!1 &8732011477665029434
 GameObject:
   m_ObjectHideFlags: 0
