@@ -8,8 +8,12 @@ public class CharacterHUD : MonoBehaviour
     public HealthHUD healthHUD;
     public StaminaHUD staminaHUD;
 
+    public WormController WormControllerReference { get; private set; }
+
     public void Initialize(WormController wormController)
     {
+        WormControllerReference = wormController;
+        
         healthHUD.Initialize(wormController.health);
         staminaHUD.Initialize(wormController.stamina);
     }
