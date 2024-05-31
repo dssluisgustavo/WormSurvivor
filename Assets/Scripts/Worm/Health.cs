@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Worm
@@ -6,6 +7,8 @@ namespace Worm
     {
         public int InitialHealth = 3;
         private int CurrentHealth;
+        
+        public event Action<int> OnHealthChanged = delegate { };
     
         private void Start()
         {
@@ -15,11 +18,13 @@ namespace Worm
         public void Damage()
         {
             CurrentHealth--;
+            OnHealthChanged.Invoke(CurrentHealth);
         }
 
         public void Recover()
         {
             CurrentHealth++;
+            OnHealthChanged.Invoke(CurrentHealth);
         }
     }
 }

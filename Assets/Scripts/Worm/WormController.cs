@@ -6,6 +6,8 @@ namespace Worm
 {
     public class WormController : MonoBehaviour
     {
+        public string wormName;
+        public Health health;
         public Stamina stamina;
         
         private bool _isSafe;
@@ -14,7 +16,6 @@ namespace Worm
         public float hideDuration = 0.1f;
         public float unHideDuration = 0.3f;
         private Tween currentTween;
-
 
         private void OnEnable()
         {
