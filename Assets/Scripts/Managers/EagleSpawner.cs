@@ -11,21 +11,20 @@ namespace Managers
     public class EagleSpawner : MonoBehaviour
     {
         public EagleController eagleControllerPrefab;
-        
+
         public float maxSpawnTime;
         public float minSpawnTime;
         public float spawnTimeDecrease = 0.25f;
-        
+
         public float eagleSpeedModIncreasedByLoop = .25f;
-        
-        [Header("References")]
-        public GameManager gameManager;
-        
+
+        [Header("References")] public GameManager gameManager;
+
         private float spawnTime;
         private float currentSpawnTime;
         private float currentEagleSpeedMod;
 
-        private List<Transform> targets = new();
+        private List<WormController> targets = new();
 
         private void Start()
         {
@@ -45,28 +44,38 @@ namespace Managers
                 Debug.Log(Time.time);
             }
         }
-        
+
         private void SpawnEagle()
         {
             var target = ChooseTarget();
-            
+            if (!target) return;
+
             var position = Random.Range(-10f, 10f);
             var eagle = Instantiate(eagleControllerPrefab, new Vector3(position, 6f, 0), Quaternion.identity);
             eagle.Setup(5f, 1f + 1f * currentEagleSpeedMod);
             eagle.SetTarget(target.transform);
             eagle.MoveToTarget();
         }
-        
+
         private Transform ChooseTarget()
         {
             if (targets.Count == 0)
             {
-                targets = gameManager.wormSpawner.Worms.Select(_ => _.transform).ToList();
+                targets = gameManager.wormSpawner.Worms.ToList();
                 eagleSpeedModIncreasedByLoop += 0.25f;
             }
 
-            var target = targets[Random.Range(0, targets.Count)];
-            targets.Remove(target);
+            Transform target = null;
+            do
+            {
+                if (targets.Count == 0) break;
+
+                var worm = targets[Random.Range(0, targets.Count)];
+                if (!worm.IsDead)
+                    target = worm.transform;
+                targets.Remove(worm);
+            } while (!target);
+
             return target;
         }
     }

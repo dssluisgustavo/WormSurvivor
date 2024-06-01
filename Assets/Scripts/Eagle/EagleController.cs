@@ -38,8 +38,14 @@ namespace Eagle
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.GetComponent<WormController>())
+            if (other.gameObject.TryGetComponent(out Health health))
             {
+                if (health.TryGetComponent(out WormController worm))
+                {
+                    if (!worm._isSafe)
+                        health.Damage();
+                }
+                
                 var direction = transform.right;
                 direction.y *= -1;
                 MoveToDirection(direction);

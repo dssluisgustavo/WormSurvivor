@@ -13,14 +13,14 @@ public class HealthHUD : MonoBehaviour
     
     public void Initialize(Health health)
     {
+        foreach (Transform child in transform)
+            Destroy(child.gameObject);
+        
         for (int i = 0; i < health.InitialHealth; i++)
         {
             var healthImg = Instantiate(healthPrefab, transform);
             _healthImgList.Add(healthImg);
         }
-
-        foreach (Transform child in transform)
-            Destroy(child.gameObject);
         
         UpdateHealth(_healthImgList.Count);
         

@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -10,12 +9,13 @@ namespace Worm
         public Health health;
         public Stamina stamina;
         
-        private bool _isSafe;
+        public bool _isSafe;
 
         private Vector3 safePosition = new Vector3(0f, -0.375f, 0f);
         public float hideDuration = 0.1f;
         public float unHideDuration = 0.3f;
         private Tween currentTween;
+        public bool IsDead => health.IsDead;
 
         private void OnEnable()
         {

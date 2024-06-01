@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eagleControllerPrefab: {fileID: 1463196176330558331, guid: 8ae04b98122678b4797efe64d8b3124d, type: 3}
-  maxSpawnTime: 5
+  maxSpawnTime: 3
   minSpawnTime: 1
   spawnTimeDecrease: 0.25
   eagleSpeedModIncreasedByLoop: 0.25
