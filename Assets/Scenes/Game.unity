@@ -133,6 +133,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 175207433}
+  - component: {fileID: 175207434}
   m_Layer: 0
   m_Name: EagleSpawner
   m_TagString: Untagged
@@ -156,6 +157,24 @@ Transform:
   - {fileID: 1515696257}
   m_Father: {fileID: 2004285997}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &175207434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175207432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2441f91fa8b45e548ae02cdcc8cd8f22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eagleControllerPrefab: {fileID: 1463196176330558331, guid: 8ae04b98122678b4797efe64d8b3124d, type: 3}
+  maxSpawnTime: 5
+  minSpawnTime: 1
+  spawnTimeDecrease: 0.25
+  eagleSpeedModIncreasedByLoop: 0.25
+  gameManager: {fileID: 2004285998}
 --- !u!1 &347973615
 GameObject:
   m_ObjectHideFlags: 0
