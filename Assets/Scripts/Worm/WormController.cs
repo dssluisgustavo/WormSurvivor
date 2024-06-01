@@ -26,21 +26,8 @@ namespace Worm
         {
             stamina.OnStaminaDepleted -= Unhide;
         }
-        
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Hide();
-            }
 
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                Unhide();
-            }
-        }
-
-        void Hide()
+        public void Hide()
         {
             _isSafe = true;
             stamina.UseStamina();
@@ -53,7 +40,7 @@ namespace Worm
                 .OnComplete(() => currentTween = null);
         }
 
-        void Unhide()
+        public void Unhide()
         {
             _isSafe = false;
                 

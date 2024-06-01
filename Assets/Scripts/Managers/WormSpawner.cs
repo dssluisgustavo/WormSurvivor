@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UI.HUD;
+using Unity.VisualScripting;
 using UnityEngine;
 using Worm;
 
@@ -16,7 +17,7 @@ namespace Managers
         private List<WormController> worms = new();
         public WormController[] Worms => worms.ToArray();
     
-        public WormController SpawnWorm()
+        public WormController SpawnWorm(bool isCPU)
         {
             if (spawnSpots.Length == worms.Count)
             {
@@ -30,6 +31,23 @@ namespace Managers
 
             var worm = character.GetComponentInChildren<WormController>();
             characterHUD.Initialize(worm);
+
+            WormInput wormInput;
+            if (isCPU)
+            {
+                var cpuObj = new GameObject("CPU_AI");
+                cpuObj.transform.SetParent(worm.transform);
+                cpuObj.transform.localPosition = Vector3.zero;
+                
+                wormInput = cpuObj.AddComponent<WormAI>();
+                ((WormAI)wormInput).Setup(2f);
+            }
+            else
+            {
+                wormInput = worm.AddComponent<PlayerInput>();
+            }
+
+            wormInput.Setup(worm);
         
             worms.Add(worm);
             return worm;
