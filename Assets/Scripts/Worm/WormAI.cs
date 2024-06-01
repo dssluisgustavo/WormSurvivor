@@ -16,10 +16,8 @@ namespace Worm
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log("collide ai");
             if (other.gameObject.TryGetComponent(out EagleController eagle))
             {
-                Debug.Log("eagleeee");
                 WormController.Hide();
             }
         }
