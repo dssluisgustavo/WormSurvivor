@@ -10,7 +10,16 @@ public class GameManager : MonoBehaviour
     
     private void Start()
     {
+        SpawnWorms();
+    }
+
+    private void SpawnWorms()
+    {
+        var playerAlreadySpawned = false;
         for (int i = 0; i < 4; i++)
-            wormSpawner.SpawnWorm();
+        {
+            wormSpawner.SpawnWorm(playerAlreadySpawned);
+            playerAlreadySpawned = true;
+        }
     }
 }

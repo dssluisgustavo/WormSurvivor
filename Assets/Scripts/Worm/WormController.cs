@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -20,27 +21,16 @@ namespace Worm
         private void OnEnable()
         {
             stamina.OnStaminaDepleted += Unhide;
+            health.OnDeath += DieAnimation;
         }
 
         private void OnDisable()
         {
             stamina.OnStaminaDepleted -= Unhide;
-        }
-        
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Hide();
-            }
-
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                Unhide();
-            }
+            health.OnDeath -= DieAnimation;
         }
 
-        void Hide()
+        public void Hide()
         {
             _isSafe = true;
             stamina.UseStamina();
@@ -53,7 +43,7 @@ namespace Worm
                 .OnComplete(() => currentTween = null);
         }
 
-        void Unhide()
+        public void Unhide()
         {
             _isSafe = false;
                 
@@ -74,6 +64,15 @@ namespace Worm
                 currentTween.Kill();
                 currentTween = null;
             }
+        }
+        
+        private void DieAnimation()
+        {
+            transform.localPosition = Vector3.zero;
+            DOTween.Sequence()
+                .Append(transform.DOShakePosition(1f))
+                .Append(transform.DOLocalMove(Vector3.zero, .25f))
+                .Append(transform.DOLocalMove(new Vector2(0f, -0.75f), 1f));
         }
     }
 }
