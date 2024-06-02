@@ -8,11 +8,11 @@ namespace Managers
 {
     public class WormSpawner : MonoBehaviour
     {
-        public Transform[] spawnSpots;
-        public RectTransform characterHUDParent;
+        [SerializeField] private Transform[] spawnSpots;
+        [SerializeField] private RectTransform characterHUDParent;
     
-        public GameObject characterPrefab;
-        public CharacterHUD characterHUDPrefab;
+        [SerializeField] private GameObject characterPrefab;
+        [SerializeField] private CharacterHUD characterHUDPrefab;
 
         private List<WormController> worms = new();
         public WormController[] Worms => worms.ToArray();

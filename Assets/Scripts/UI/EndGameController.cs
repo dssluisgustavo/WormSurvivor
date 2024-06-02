@@ -1,19 +1,17 @@
-using System;
 using Managers;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace UI
 {
     public class EndGameController : MonoBehaviour
     {
-        public TextMeshProUGUI title;
-        private Canvas canvas;
+        [SerializeField] private TextMeshProUGUI title;
+        private Canvas _canvas;
 
         private void Awake()
         {
-            canvas = GetComponent<Canvas>();
+            _canvas = GetComponent<Canvas>();
         }
 
         public void PlayAgain()
@@ -29,7 +27,7 @@ namespace UI
         public void ShowWindow(string winnerName)
         {
             title.text = winnerName + " Wins!";
-            canvas.enabled = true;
+            _canvas.enabled = true;
         }
     }
 }

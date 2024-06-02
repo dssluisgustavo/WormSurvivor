@@ -6,11 +6,11 @@ namespace UI.HUD
 {
     public class StaminaHUD : MonoBehaviour
     {
-        public Slider slider;
+        [SerializeField] private Slider slider;
     
         public void Initialize(Stamina stamina)
         {
-            slider.maxValue = stamina.maxStamina;
+            slider.maxValue = stamina.MaxStamina;
         
             UpdateStamina(slider.maxValue);
         

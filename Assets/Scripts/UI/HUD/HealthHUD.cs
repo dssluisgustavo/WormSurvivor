@@ -7,7 +7,7 @@ namespace UI.HUD
 {
     public class HealthHUD : MonoBehaviour
     {
-        public Image healthPrefab;
+        [SerializeField] private Image healthPrefab;
     
         private List<Image> _healthImgList = new();
     

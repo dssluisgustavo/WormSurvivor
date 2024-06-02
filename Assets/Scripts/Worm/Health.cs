@@ -5,10 +5,10 @@ namespace Worm
 {
     public class Health : MonoBehaviour
     {
-        public int InitialHealth = 3;
-        private int CurrentHealth;
+        [field: SerializeField] public int InitialHealth { get; private set; } = 3;
+        private int _currentHealth;
 
-        public GameObject overrideObjectToDestroy;
+        [SerializeField] private GameObject overrideObjectToDestroy;
         
         public event Action<int> OnHealthChanged = delegate { };
         public event Action OnDeath = delegate { };
@@ -17,30 +17,30 @@ namespace Worm
     
         private void Start()
         {
-            CurrentHealth = InitialHealth;
+            _currentHealth = InitialHealth;
             if (!overrideObjectToDestroy)
                 overrideObjectToDestroy = gameObject;
         }
 
         public void Damage()
         {
-            if (CurrentHealth == 0) return;
+            if (_currentHealth == 0) return;
             
-            CurrentHealth--;
+            _currentHealth--;
 
-            if (CurrentHealth <= 0)
+            if (_currentHealth <= 0)
             {
                 IsDead = true;
                 OnDeath();
             }
 
-            OnHealthChanged.Invoke(CurrentHealth);
+            OnHealthChanged.Invoke(_currentHealth);
         }
 
         public void Recover()
         {
-            CurrentHealth++;
-            OnHealthChanged.Invoke(CurrentHealth);
+            _currentHealth++;
+            OnHealthChanged.Invoke(_currentHealth);
         }
     }
 }

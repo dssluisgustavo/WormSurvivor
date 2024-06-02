@@ -6,9 +6,9 @@ namespace UI.HUD
 {
     public class CharacterHUD : MonoBehaviour
     {
-        public TextMeshProUGUI characterName;
-        public HealthHUD healthHUD;
-        public StaminaHUD staminaHUD;
+        [SerializeField] private TextMeshProUGUI characterName;
+        [SerializeField] private HealthHUD healthHUD;
+        [SerializeField] private StaminaHUD staminaHUD;
 
         public WormController WormControllerReference { get; private set; }
 
@@ -16,8 +16,8 @@ namespace UI.HUD
         {
             WormControllerReference = wormController;
 
-            healthHUD.Initialize(wormController.health);
-            staminaHUD.Initialize(wormController.stamina);
+            healthHUD.Initialize(wormController.Health);
+            staminaHUD.Initialize(wormController.Stamina);
         }
     }
 }
