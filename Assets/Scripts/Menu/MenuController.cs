@@ -1,6 +1,6 @@
+using Managers;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Menu
 {
@@ -8,7 +8,7 @@ namespace Menu
     {
         public void Play()
         {
-            SceneManager.LoadScene("Game");
+            SceneController.LoadGame();
         }
 
         public void Quit()

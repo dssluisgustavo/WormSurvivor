@@ -1,4 +1,5 @@
 using System;
+using Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -17,12 +18,12 @@ namespace UI
 
         public void PlayAgain()
         {
-            SceneManager.LoadScene("Game");
+            SceneController.LoadGame();
         }
 
         public void Exit()
         {
-            SceneManager.LoadScene("Menu");
+            SceneController.LoadMenu();
         }
 
         public void ShowWindow(string winnerName)
