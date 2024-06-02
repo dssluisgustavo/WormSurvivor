@@ -1,12 +1,11 @@
 using Managers;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Pause
 {
     public class PauseController : MonoBehaviour
     {
-        public Canvas canvas;
+        [SerializeField] private Canvas canvas;
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))

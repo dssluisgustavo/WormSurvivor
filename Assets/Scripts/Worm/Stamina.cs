@@ -6,70 +6,70 @@ namespace Worm
 {
     public class Stamina : MonoBehaviour
     {
-        public float maxStamina;
-        public float depleteDuration;
-        public float recoverDuration;
+        [field: SerializeField] public float MaxStamina { get; private set; }
+        [SerializeField] private float depleteDuration;
+        [SerializeField] private float recoverDuration;
         
-        private float currentStamina;
+        private float _currentStamina;
         public event Action<float> OnStaminaChanged = _ => { };
         public event Action OnStaminaDepleted = () => { };
-        private Tween currentTween;
+        private Tween _currentTween;
         
         private void Start()
         {
-            currentStamina = maxStamina;
+            _currentStamina = MaxStamina;
         }
 
         public void UseStamina()
         {
-            var interval = currentStamina / 100f;
+            var interval = _currentStamina / 100f;
             
-            if (currentTween != null)
+            if (_currentTween != null)
             {
-                currentTween.Kill();
-                currentTween = null;
+                _currentTween.Kill();
+                _currentTween = null;
             }
             
-            currentTween = DOTween
+            _currentTween = DOTween
                 .To(
-                    () => currentStamina, 
+                    () => _currentStamina, 
                     v =>
                     {
-                        currentStamina = v;
-                        OnStaminaChanged.Invoke(currentStamina);
+                        _currentStamina = v;
+                        OnStaminaChanged.Invoke(_currentStamina);
                     }, 
                     0f, 
                     depleteDuration * interval)
                 .SetEase(Ease.Linear)
                 .OnComplete(() =>
                 {
-                    currentTween = null;
+                    _currentTween = null;
                     OnStaminaDepleted();
                 });
         }
 
         public void RecoverStamina()
         {
-            var interval = (100f - currentStamina) / 100f;
+            var interval = (100f - _currentStamina) / 100f;
             
-            if (currentTween != null)
+            if (_currentTween != null)
             {
-                currentTween.Kill();
-                currentTween = null;
+                _currentTween.Kill();
+                _currentTween = null;
             }
             
-            currentTween = DOTween
+            _currentTween = DOTween
                 .To(
-                    () => currentStamina, 
+                    () => _currentStamina, 
                     v =>
                     {
-                        currentStamina = v;
-                        OnStaminaChanged.Invoke(currentStamina);
+                        _currentStamina = v;
+                        OnStaminaChanged.Invoke(_currentStamina);
                     }, 
                     100f, 
                     recoverDuration * interval)
                 .SetEase(Ease.Linear)
-                .OnComplete(() => currentTween = null);
+                .OnComplete(() => _currentTween = null);
         }
     }
 }

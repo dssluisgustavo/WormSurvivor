@@ -1,4 +1,5 @@
 using DG.Tweening;
+using UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,7 +8,7 @@ namespace Managers
 {
     public class SceneController
     {
-        public static Image _blackScreen;
+        private static Image _blackScreen;
         
         public static void LoadMenu()
         {

@@ -1,4 +1,3 @@
-using System;
 using Managers;
 using UnityEngine;
 using Worm;
@@ -7,24 +6,24 @@ namespace Eagle
 {
     public class EagleController : MonoBehaviour
     {
-        public Rigidbody2D rb2D;
-        public float speed;
-        public float speedMod;
+        [SerializeField] private Rigidbody2D rb2D;
+        [SerializeField] private float speed;
+        [SerializeField] private float speedMod;
     
-        private Transform target;
-        private bool alreadyHit;
+        private Transform _target;
+        private bool _alreadyHit;
 
-        private GameManager gameManager;
+        private GameManager _gameManager;
 
         private void OnDisable()
         {
-            if(gameManager)
-                gameManager.OnGameEnd -= KillObject;
+            if(_gameManager)
+                _gameManager.OnGameEnd -= KillObject;
         }
 
         public void SetGameManager(GameManager gameManager)
         {
-            this.gameManager = gameManager;
+            this._gameManager = gameManager;
             gameManager.OnGameEnd += KillObject;
         }
         
@@ -36,12 +35,12 @@ namespace Eagle
     
         public void SetTarget(Transform target)
         {
-            this.target = target;
+            this._target = target;
         }
 
         public void MoveToTarget()
         {
-            var direction = target.position - transform.position;
+            var direction = _target.position - transform.position;
             MoveToDirection(direction.normalized);
         }
     
@@ -57,12 +56,12 @@ namespace Eagle
         {
             if (other.gameObject.TryGetComponent(out Health health))
             {
-                if (alreadyHit) return;
+                if (_alreadyHit) return;
                 
-                alreadyHit = true;
+                _alreadyHit = true;
                 if (health.TryGetComponent(out WormController worm))
                 {
-                    if (!worm._isSafe)
+                    if (!worm.IsSafe)
                         health.Damage();
                 }
                 

@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Eagle;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Worm;
 using Random = UnityEngine.Random;
 
@@ -11,27 +9,27 @@ namespace Managers
 {
     public class EagleSpawner : MonoBehaviour
     {
-        public EagleController eagleControllerPrefab;
+        [SerializeField] private EagleController eagleControllerPrefab;
 
-        public float maxSpawnTime;
-        public float minSpawnTime;
-        public float spawnTimeDecrease = 0.25f;
+        [SerializeField] private float maxSpawnTime;
+        [SerializeField] private float minSpawnTime;
+        [SerializeField] private float spawnTimeDecrease = 0.25f;
 
-        public float eagleSpeedModIncreasedByLoop = .25f;
+        [SerializeField] private float eagleSpeedModIncreasedByLoop = .25f;
 
-        [Header("References")] public GameManager gameManager;
+        [Header("References")] [SerializeField] private GameManager gameManager;
 
-        private float spawnTime;
-        private float currentSpawnTime;
-        private float currentEagleSpeedMod;
+        private float _spawnTime;
+        private float _currentSpawnTime;
+        private float _currentEagleSpeedMod;
 
-        private List<WormController> targets = new();
+        private List<WormController> _targets = new();
 
         private void Start()
         {
-            spawnTime = maxSpawnTime;
-            currentSpawnTime = spawnTime;
-            currentEagleSpeedMod = -eagleSpeedModIncreasedByLoop; //will be setted to zero on first spawn
+            _spawnTime = maxSpawnTime;
+            _currentSpawnTime = _spawnTime;
+            _currentEagleSpeedMod = -eagleSpeedModIncreasedByLoop; //will be setted to zero on first spawn
             gameManager.OnGameEnd += StopSpawner;
         }
 
@@ -42,12 +40,12 @@ namespace Managers
 
         private void Update()
         {
-            currentSpawnTime -= Time.deltaTime;
-            if (currentSpawnTime <= 0)
+            _currentSpawnTime -= Time.deltaTime;
+            if (_currentSpawnTime <= 0)
             {
                 SpawnEagle();
-                spawnTime = Mathf.Clamp(spawnTime - spawnTimeDecrease, minSpawnTime, maxSpawnTime);
-                currentSpawnTime = spawnTime;
+                _spawnTime = Mathf.Clamp(_spawnTime - spawnTimeDecrease, minSpawnTime, maxSpawnTime);
+                _currentSpawnTime = _spawnTime;
                 Debug.Log(Time.time);
             }
         }
@@ -60,28 +58,28 @@ namespace Managers
             var position = Random.Range(-10f, 10f);
             var eagle = Instantiate(eagleControllerPrefab, new Vector3(position, 6f, 0), Quaternion.identity);
             eagle.SetGameManager(gameManager);
-            eagle.Setup(5f, 1f + 1f * currentEagleSpeedMod);
+            eagle.Setup(5f, 1f + 1f * _currentEagleSpeedMod);
             eagle.SetTarget(target.transform);
             eagle.MoveToTarget();
         }
 
         private Transform ChooseTarget()
         {
-            if (targets.Count == 0)
+            if (_targets.Count == 0)
             {
-                targets = gameManager.wormSpawner.Worms.ToList();
-                currentEagleSpeedMod += 0.25f;
+                _targets = gameManager.WormSpawner.Worms.ToList();
+                _currentEagleSpeedMod += 0.25f;
             }
 
             Transform target = null;
             do
             {
-                if (targets.Count == 0) break;
+                if (_targets.Count == 0) break;
 
-                var worm = targets[Random.Range(0, targets.Count)];
+                var worm = _targets[Random.Range(0, _targets.Count)];
                 if (!worm.IsDead)
                     target = worm.transform;
-                targets.Remove(worm);
+                _targets.Remove(worm);
             } while (!target);
 
             return target;

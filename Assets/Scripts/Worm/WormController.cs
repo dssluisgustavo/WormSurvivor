@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -6,68 +5,68 @@ namespace Worm
 {
     public class WormController : MonoBehaviour
     {
-        public string wormName;
-        public Health health;
-        public Stamina stamina;
+        [field: SerializeField] public string WormName { get; private set; }
+        [field:SerializeField] public Health Health { get; private set; }
+        [field: SerializeField] public Stamina Stamina { get; private set; }
         
-        public bool _isSafe;
+        [field: SerializeField] public bool IsSafe { get; private set; }
 
-        private Vector3 safePosition = new Vector3(0f, -0.375f, 0f);
-        public float hideDuration = 0.1f;
-        public float unHideDuration = 0.3f;
-        private Tween currentTween;
-        public bool IsDead => health.IsDead;
+        private Vector3 _safePosition = new Vector3(0f, -0.375f, 0f);
+        [SerializeField] private float hideDuration = 0.1f;
+        [SerializeField] private float unHideDuration = 0.3f;
+        private Tween _currentTween;
+        public bool IsDead => Health.IsDead;
         public bool IsCPU { get; set; }
 
         private void OnEnable()
         {
-            stamina.OnStaminaDepleted += Unhide;
-            health.OnDeath += DieAnimation;
+            Stamina.OnStaminaDepleted += Unhide;
+            Health.OnDeath += DieAnimation;
         }
 
         private void OnDisable()
         {
-            stamina.OnStaminaDepleted -= Unhide;
-            health.OnDeath -= DieAnimation;
+            Stamina.OnStaminaDepleted -= Unhide;
+            Health.OnDeath -= DieAnimation;
         }
 
         public void Hide()
         {
             
-            stamina.UseStamina();
+            Stamina.UseStamina();
                 
            TryClearTween();
 
-            currentTween = transform
-                .DOLocalMove(safePosition, hideDuration)
+            _currentTween = transform
+                .DOLocalMove(_safePosition, hideDuration)
                 .SetEase(Ease.Linear)
                 .OnComplete(() =>
                 {
-                    _isSafe = true;
-                    currentTween = null;
+                    IsSafe = true;
+                    _currentTween = null;
                 });
         }
 
         public void Unhide()
         {
-            _isSafe = false;
+            IsSafe = false;
                 
-            stamina.RecoverStamina();
+            Stamina.RecoverStamina();
                 
             TryClearTween();
 
-            currentTween = transform
+            _currentTween = transform
                 .DOLocalMove(Vector3.zero, unHideDuration)
                 .SetEase(Ease.Linear)
-                .OnComplete(() => currentTween = null);
+                .OnComplete(() => _currentTween = null);
         }
         
         void TryClearTween()
         {
-            if (currentTween != null)
+            if (_currentTween != null)
             {
-                currentTween.Kill();
-                currentTween = null;
+                _currentTween.Kill();
+                _currentTween = null;
             }
         }
         

@@ -6,8 +6,8 @@ namespace Managers
 {
     public class GameManager : MonoBehaviour
     {
-        public WormSpawner wormSpawner;
-        public EndGameController endGameController;
+        [field: SerializeField] public WormSpawner WormSpawner { get; private set; }
+        [SerializeField] private EndGameController endGameController;
     
         public event System.Action OnGameEnd = delegate { };
     
@@ -21,8 +21,8 @@ namespace Managers
             var playerAlreadySpawned = false;
             for (int i = 0; i < 4; i++)
             {
-                var worm = wormSpawner.SpawnWorm(playerAlreadySpawned);
-                worm.health.OnDeath += CheckWormDeath;
+                var worm = WormSpawner.SpawnWorm(playerAlreadySpawned);
+                worm.Health.OnDeath += CheckWormDeath;
             
                 playerAlreadySpawned = true;
             }
@@ -30,12 +30,12 @@ namespace Managers
 
         private void CheckWormDeath()
         {
-            var worms = wormSpawner.Worms;
+            var worms = WormSpawner.Worms;
             var wormsAlive = worms.Where(w => !w.IsDead);
             if (wormsAlive.Count() <= 1)
             {
                 var worm = worms.FirstOrDefault();
-                endGameController.ShowWindow(worm?.wormName);
+                endGameController.ShowWindow(worm?.WormName);
             
                 OnGameEnd();
             }
