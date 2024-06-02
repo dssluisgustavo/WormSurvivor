@@ -1,20 +1,22 @@
 using UnityEngine;
-using Worm;
 
-public class PlayerInput : WormInput
+namespace Worm
 {
-    void Update()
+    public class PlayerInput : WormInput
     {
-        if (WormController.IsDead) return;
+        void Update()
+        {
+            if (WormController.IsDead) return;
         
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            WormController.Hide();
-        }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                WormController.Hide();
+            }
 
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            WormController.Unhide();
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                WormController.Unhide();
+            }
         }
     }
 }
