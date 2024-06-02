@@ -30,13 +30,13 @@ namespace Managers
             var characterHUD = Instantiate(characterHUDPrefab, characterHUDParent);
 
             var worm = character.GetComponentInChildren<WormController>();
+            worm.IsCPU = isCPU;
             characterHUD.Initialize(worm);
 
             WormInput wormInput;
             if (isCPU)
             {
-                var cpuObj = new GameObject("CPU_AI");
-                cpuObj.transform.SetParent(worm.transform);
+                var cpuObj = Instantiate(new GameObject("CPU_AI"), worm.transform, true);
                 cpuObj.transform.localPosition = Vector3.zero;
                 
                 wormInput = cpuObj.AddComponent<WormAI>();
