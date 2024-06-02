@@ -10,6 +10,7 @@ namespace Eagle
         public float speedMod;
     
         private Transform target;
+        private bool alreadyHit;
 
         public void Setup(float speed, float speedMod)
         {
@@ -40,6 +41,9 @@ namespace Eagle
         {
             if (other.gameObject.TryGetComponent(out Health health))
             {
+                if (alreadyHit) return;
+                
+                alreadyHit = true;
                 if (health.TryGetComponent(out WormController worm))
                 {
                     if (!worm._isSafe)
