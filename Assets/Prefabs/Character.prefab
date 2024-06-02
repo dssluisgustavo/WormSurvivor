@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dbba1205830f47428ef15b56b7b3db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitialHealth: 3
+  InitialHealth: 1
   overrideObjectToDestroy: {fileID: 0}
 --- !u!114 &5929221868822249113
 MonoBehaviour:

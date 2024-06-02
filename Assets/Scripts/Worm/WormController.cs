@@ -17,6 +17,7 @@ namespace Worm
         public float unHideDuration = 0.3f;
         private Tween currentTween;
         public bool IsDead => health.IsDead;
+        public bool IsCPU { get; set; }
 
         private void OnEnable()
         {
@@ -32,7 +33,7 @@ namespace Worm
 
         public void Hide()
         {
-            _isSafe = true;
+            
             stamina.UseStamina();
                 
            TryClearTween();
@@ -40,7 +41,11 @@ namespace Worm
             currentTween = transform
                 .DOLocalMove(safePosition, hideDuration)
                 .SetEase(Ease.Linear)
-                .OnComplete(() => currentTween = null);
+                .OnComplete(() =>
+                {
+                    _isSafe = true;
+                    currentTween = null;
+                });
         }
 
         public void Unhide()

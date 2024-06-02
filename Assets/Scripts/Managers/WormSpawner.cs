@@ -36,7 +36,8 @@ namespace Managers
             WormInput wormInput;
             if (isCPU)
             {
-                var cpuObj = Instantiate(new GameObject("CPU_AI"), worm.transform, true);
+                var cpuObj = new GameObject("CPU_AI");
+                cpuObj.transform.SetParent(worm.transform);
                 cpuObj.transform.localPosition = Vector3.zero;
                 
                 wormInput = cpuObj.AddComponent<WormAI>();

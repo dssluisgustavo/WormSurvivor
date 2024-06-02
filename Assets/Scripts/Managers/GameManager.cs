@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public WormSpawner wormSpawner;
     public EndGameController endGameController;
     
+    public event System.Action OnGameEnd = delegate { };
+    
     private void Start()
     {
         SpawnWorms();
@@ -34,7 +36,7 @@ public class GameManager : MonoBehaviour
             var worm = worms.FirstOrDefault();
             endGameController.ShowWindow(worm?.wormName);
             
-            //endgameevent
+            OnGameEnd();
         }
     }
 }
