@@ -904,8 +904,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ff84d534bb9a0b48ad8d91960f8b830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <WormSpawner>k__BackingField: {fileID: 0}
-  endGameController: {fileID: 0}
+  <WormSpawner>k__BackingField: {fileID: 764840732}
+  endGameController: {fileID: 5815424928417879962}
 --- !u!1 &2042535448
 GameObject:
   m_ObjectHideFlags: 0
@@ -1289,6 +1289,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 202457b8eecf29c49b598a39396af7fb, type: 3}
+--- !u!114 &5815424928417879962 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5959811408303270947, guid: 202457b8eecf29c49b598a39396af7fb, type: 3}
+  m_PrefabInstance: {fileID: 5815424928417879961}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e29c795edc6913847ae852ed11350ce4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
