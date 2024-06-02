@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Eagle;
@@ -31,6 +32,12 @@ namespace Managers
             spawnTime = maxSpawnTime;
             currentSpawnTime = spawnTime;
             currentEagleSpeedMod = -eagleSpeedModIncreasedByLoop; //will be setted to zero on first spawn
+            gameManager.OnGameEnd += StopSpawner;
+        }
+
+        private void OnDisable()
+        {
+            gameManager.OnGameEnd -= StopSpawner;
         }
 
         private void Update()
@@ -52,6 +59,7 @@ namespace Managers
 
             var position = Random.Range(-10f, 10f);
             var eagle = Instantiate(eagleControllerPrefab, new Vector3(position, 6f, 0), Quaternion.identity);
+            eagle.SetGameManager(gameManager);
             eagle.Setup(5f, 1f + 1f * currentEagleSpeedMod);
             eagle.SetTarget(target.transform);
             eagle.MoveToTarget();
@@ -77,6 +85,11 @@ namespace Managers
             } while (!target);
 
             return target;
+        }
+
+        private void StopSpawner()
+        {
+            gameObject.SetActive(false);
         }
     }
 }

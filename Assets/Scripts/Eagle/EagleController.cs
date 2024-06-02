@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Worm;
 
@@ -12,6 +13,20 @@ namespace Eagle
         private Transform target;
         private bool alreadyHit;
 
+        private GameManager gameManager;
+
+        private void OnDisable()
+        {
+            if(gameManager)
+                gameManager.OnGameEnd -= KillObject;
+        }
+
+        public void SetGameManager(GameManager gameManager)
+        {
+            this.gameManager = gameManager;
+            gameManager.OnGameEnd += KillObject;
+        }
+        
         public void Setup(float speed, float speedMod)
         {
             this.speed = speed;
@@ -57,6 +72,11 @@ namespace Eagle
 
             if (other.gameObject.CompareTag("DeadLine"))
                 Destroy(gameObject);
+        }
+        
+        private void KillObject()
+        {
+            Destroy(gameObject);
         }
     }
 }
