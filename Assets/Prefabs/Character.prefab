@@ -333,6 +333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <InitialHealth>k__BackingField: 3
   overrideObjectToDestroy: {fileID: 0}
+  spriteRenderer: {fileID: 316135896687929998}
 --- !u!114 &5929221868822249113
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,6 @@
 using System;
+using DG.Tweening;
+using DG.Tweening.Core.Easing;
 using UnityEngine;
 
 namespace Worm
@@ -9,12 +11,13 @@ namespace Worm
         private int _currentHealth;
 
         [SerializeField] private GameObject overrideObjectToDestroy;
-        
+        [SerializeField] private SpriteRenderer spriteRenderer;
+
         public event Action<int> OnHealthChanged = delegate { };
         public event Action OnDeath = delegate { };
-        
+
         public bool IsDead { get; private set; }
-    
+
         private void Start()
         {
             _currentHealth = InitialHealth;
@@ -25,7 +28,7 @@ namespace Worm
         public void Damage()
         {
             if (_currentHealth == 0) return;
-            
+
             _currentHealth--;
 
             if (_currentHealth <= 0)
@@ -34,6 +37,9 @@ namespace Worm
                 OnDeath();
             }
 
+
+            FlashSprite();
+
             OnHealthChanged.Invoke(_currentHealth);
         }
 
@@ -41,6 +47,18 @@ namespace Worm
         {
             _currentHealth++;
             OnHealthChanged.Invoke(_currentHealth);
+        }
+
+        private void FlashSprite()
+        {
+            if (!spriteRenderer) return;
+
+            DOTween.Sequence()
+                .Append(spriteRenderer.DOFade(0f, 0f))
+                .AppendInterval(.1f)
+                .Append(spriteRenderer.DOFade(1f, 0f))
+                .AppendInterval(.1f)
+                .SetLoops(3);
         }
     }
 }
