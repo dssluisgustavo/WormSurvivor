@@ -7,6 +7,7 @@ namespace Eagle
     public class EagleController : MonoBehaviour
     {
         [SerializeField] private Rigidbody2D rb2D;
+        [SerializeField] private EagleSpriteHandler eagleSpriteHandler;
         [SerializeField] private float speed;
         [SerializeField] private float speedMod;
     
@@ -50,6 +51,7 @@ namespace Eagle
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
         
             rb2D.velocity = direction * (speed * speedMod);
+            eagleSpriteHandler.FixRotation(rb2D.velocity.x);
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -64,6 +66,8 @@ namespace Eagle
                     if (!worm.IsSafe)
                         health.Damage();
                 }
+                
+                eagleSpriteHandler.ChangeToRisingSprite();
                 
                 var direction = transform.right;
                 direction.y *= -1;

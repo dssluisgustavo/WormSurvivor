@@ -46,7 +46,6 @@ namespace Managers
                 SpawnEagle();
                 _spawnTime = Mathf.Clamp(_spawnTime - spawnTimeDecrease, minSpawnTime, maxSpawnTime);
                 _currentSpawnTime = _spawnTime;
-                Debug.Log(Time.time);
             }
         }
 
