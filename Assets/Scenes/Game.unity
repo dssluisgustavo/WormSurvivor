@@ -913,8 +913,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 138286296}
   - {fileID: 1279770827}
+  - {fileID: 138286296}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1010,49 +1010,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2303644850500760641, guid: 7de04cd9b28c1f7429a14c5f25355e37, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2303644850500760641, guid: 7de04cd9b28c1f7429a14c5f25355e37, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2303644850500760641, guid: 7de04cd9b28c1f7429a14c5f25355e37, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2303644850500760641, guid: 7de04cd9b28c1f7429a14c5f25355e37, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2303644850500760641, guid: 7de04cd9b28c1f7429a14c5f25355e37, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3384836779235961346, guid: 7de04cd9b28c1f7429a14c5f25355e37, type: 3}
       propertyPath: m_Name
       value: PauseUi
-      objectReference: {fileID: 0}
-    - target: {fileID: 8228394951244968041, guid: 7de04cd9b28c1f7429a14c5f25355e37, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8228394951244968041, guid: 7de04cd9b28c1f7429a14c5f25355e37, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8228394951244968041, guid: 7de04cd9b28c1f7429a14c5f25355e37, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8228394951244968041, guid: 7de04cd9b28c1f7429a14c5f25355e37, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8228394951244968041, guid: 7de04cd9b28c1f7429a14c5f25355e37, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
