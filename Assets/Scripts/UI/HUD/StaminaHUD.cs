@@ -1,24 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Worm;
 
-public class StaminaHUD : MonoBehaviour
+namespace UI.HUD
 {
-    public Slider slider;
+    public class StaminaHUD : MonoBehaviour
+    {
+        public Slider slider;
     
-    public void Initialize(Stamina stamina)
-    {
-        slider.maxValue = stamina.maxStamina;
+        public void Initialize(Stamina stamina)
+        {
+            slider.maxValue = stamina.maxStamina;
         
-        UpdateStamina(slider.maxValue);
+            UpdateStamina(slider.maxValue);
         
-        stamina.OnStaminaChanged += UpdateStamina;
-    }
+            stamina.OnStaminaChanged += UpdateStamina;
+        }
 
-    private void UpdateStamina(float value)
-    {
-        slider.value = value;
+        private void UpdateStamina(float value)
+        {
+            slider.value = value;
+        }
     }
 }
