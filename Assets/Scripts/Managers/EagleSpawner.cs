@@ -62,7 +62,7 @@ namespace Managers
             if (targets.Count == 0)
             {
                 targets = gameManager.wormSpawner.Worms.ToList();
-                eagleSpeedModIncreasedByLoop += 0.25f;
+                currentEagleSpeedMod += 0.25f;
             }
 
             Transform target = null;
