@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 405879596879207666}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalPosition: {x: 0, y: -1.5, z: 0}
+  m_LocalScale: {x: 1, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 333230301486186713}
@@ -270,6 +270,7 @@ MonoBehaviour:
   wormName: 
   health: {fileID: 6950468895550862790}
   stamina: {fileID: 5929221868822249113}
+  _isSafe: 0
   hideDuration: 0.1
   unHideDuration: 0.3
 --- !u!114 &6950468895550862790
@@ -285,6 +286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialHealth: 3
+  overrideObjectToDestroy: {fileID: 0}
 --- !u!114 &5929221868822249113
 MonoBehaviour:
   m_ObjectHideFlags: 0

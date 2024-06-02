@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,28 +8,27 @@ namespace UI
     public class EndGameController : MonoBehaviour
     {
         public TextMeshProUGUI title;
-        void PlayAgain()
+        private Canvas canvas;
+
+        private void Awake()
+        {
+            canvas = GetComponent<Canvas>();
+        }
+
+        public void PlayAgain()
         {
             SceneManager.LoadScene("Game");
         }
 
-        void Quit()
+        public void Exit()
         {
             SceneManager.LoadScene("Menu");
         }
 
-        public void SetAsVictory()
+        public void ShowWindow(string winnerName)
         {
-            ChangeTitle("Congratulations!!!\nYou Win");
-        }
-
-        public void SetAsDefeat()
-        {
-            ChangeTitle("You Lose!!!");
-        }
-        private void ChangeTitle(string message)
-        {
-            title.text = message;
+            title.text = winnerName + " Wins!";
+            canvas.enabled = true;
         }
     }
 }

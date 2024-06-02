@@ -1,12 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using Managers;
+using UI;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public WormSpawner wormSpawner;
+    public EndGameController endGameController;
     
     private void Start()
     {
@@ -18,8 +18,23 @@ public class GameManager : MonoBehaviour
         var playerAlreadySpawned = false;
         for (int i = 0; i < 4; i++)
         {
-            wormSpawner.SpawnWorm(playerAlreadySpawned);
+            var worm = wormSpawner.SpawnWorm(playerAlreadySpawned);
+            worm.health.OnDeath += CheckWormDeath;
+            
             playerAlreadySpawned = true;
+        }
+    }
+
+    private void CheckWormDeath()
+    {
+        var worms = wormSpawner.Worms;
+        var wormsAlive = worms.Where(w => !w.IsDead);
+        if (wormsAlive.Count() <= 1)
+        {
+            var worm = worms.FirstOrDefault();
+            endGameController.ShowWindow(worm?.wormName);
+            
+            //endgameevent
         }
     }
 }
