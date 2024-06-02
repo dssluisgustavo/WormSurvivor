@@ -268,8 +268,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <WormName>k__BackingField: 
-  <Health>k__BackingField: {fileID: 0}
-  <Stamina>k__BackingField: {fileID: 0}
+  <Health>k__BackingField: {fileID: 6950468895550862790}
+  <Stamina>k__BackingField: {fileID: 5929221868822249113}
   <IsSafe>k__BackingField: 0
   hideDuration: 0.1
   unHideDuration: 0.3
