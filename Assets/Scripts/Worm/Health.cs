@@ -18,6 +18,8 @@ namespace Worm
 
         public bool IsDead { get; private set; }
 
+        private Tween _currentTween;
+        
         private void Start()
         {
             _currentHealth = InitialHealth;
@@ -53,12 +55,17 @@ namespace Worm
         {
             if (!spriteRenderer) return;
 
-            DOTween.Sequence()
+            _currentTween = DOTween.Sequence()
                 .Append(spriteRenderer.DOFade(0f, 0f))
                 .AppendInterval(.1f)
                 .Append(spriteRenderer.DOFade(1f, 0f))
                 .AppendInterval(.1f)
                 .SetLoops(3);
+        }
+
+        private void OnDestroy()
+        {
+            _currentTween.Kill();
         }
     }
 }

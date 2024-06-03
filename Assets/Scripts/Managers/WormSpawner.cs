@@ -31,7 +31,6 @@ namespace Managers
 
             var worm = character.GetComponentInChildren<WormController>();
             worm.IsCPU = isCPU;
-            characterHUD.Initialize(worm);
 
             WormInput wormInput;
             if (isCPU)
@@ -40,14 +39,18 @@ namespace Managers
                 cpuObj.transform.SetParent(worm.transform);
                 cpuObj.transform.localPosition = Vector3.zero;
                 
+                worm.SetWormName($"CPU - {worms.Count}");
+                
                 wormInput = cpuObj.AddComponent<WormAI>();
                 ((WormAI)wormInput).Setup(2f);
             }
             else
             {
+                worm.SetWormName("Player");
                 wormInput = worm.AddComponent<PlayerInput>();
             }
 
+            characterHUD.Initialize(worm);
             wormInput.Setup(worm);
         
             worms.Add(worm);

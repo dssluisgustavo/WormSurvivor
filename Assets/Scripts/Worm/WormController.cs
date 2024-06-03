@@ -84,5 +84,10 @@ namespace Worm
                 .Append(transform.DOLocalMove(Vector3.zero, .25f))
                 .Append(transform.DOLocalMove(_safePosition - new Vector3(0f, 5f), 1f));
         }
+
+        public void SetWormName(string player)
+        {
+            WormName = player;
+        }
     }
 }
