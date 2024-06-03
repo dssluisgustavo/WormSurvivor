@@ -19,6 +19,7 @@ namespace Worm
         private Tween _currentTween;
         public bool IsDead => Health.IsDead;
         public bool IsCPU { get; set; }
+        public int SpotIndex { get; set; }
 
         private void Start()
         {
@@ -88,6 +89,11 @@ namespace Worm
         public void SetWormName(string player)
         {
             WormName = player;
+        }
+        
+        public void SetSpotIndex(int index)
+        {
+            SpotIndex = index;
         }
     }
 }
