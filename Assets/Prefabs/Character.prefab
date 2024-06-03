@@ -347,7 +347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MaxStamina>k__BackingField: 100
-  depleteDuration: 2
+  depleteDuration: 0.5
   recoverDuration: 4
 --- !u!1 &8732011477665029434
 GameObject:
