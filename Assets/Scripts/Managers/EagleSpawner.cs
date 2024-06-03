@@ -28,13 +28,15 @@ namespace Managers
         private void Start()
         {
             _spawnTime = maxSpawnTime;
-            _currentSpawnTime = _spawnTime;
+            _currentSpawnTime = Mathf.Infinity;
             _currentEagleSpeedMod = -eagleSpeedModIncreasedByLoop; //will be setted to zero on first spawn
+            gameManager.OnGameStart += StartSpawner;
             gameManager.OnGameEnd += StopSpawner;
         }
 
         private void OnDisable()
         {
+            gameManager.OnGameStart -= StartSpawner;
             gameManager.OnGameEnd -= StopSpawner;
         }
 
@@ -82,6 +84,11 @@ namespace Managers
             } while (!target);
 
             return target;
+        }
+
+        private void StartSpawner()
+        {
+            _currentSpawnTime = _spawnTime;
         }
 
         private void StopSpawner()
