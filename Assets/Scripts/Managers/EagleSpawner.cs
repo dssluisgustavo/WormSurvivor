@@ -1,11 +1,11 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Audio;
 using Eagle;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Worm;
-using Random = UnityEngine.Random;
 
 namespace Managers
 {
@@ -13,33 +13,40 @@ namespace Managers
     {
         [SerializeField] private EagleController eagleControllerPrefab;
 
-        [SerializeField] private float maxSpawnTime;
+        [Header("SpawnTime")]
+        [SerializeField] private float initialSpawnTime;
         [SerializeField] private float minSpawnTime;
         [SerializeField] private float spawnTimeDecrease = 0.25f;
-
+        [SerializeField] private float spawnTimeDecreaseDelay = 4f;
+        
+        [Header("Eagle Settings")]
+        
         [SerializeField] private float eagleSpeedModIncreasedByLoop = .25f;
+        [SerializeField] private float eagleSpeedModMax = 5f;
 
         [Header("References")] 
         [SerializeField] private GameManager gameManager;
         [SerializeField] private AudioManager audioManager;
 
-        private float _spawnTime;
-        private float _currentSpawnTime;
-        private float _currentEagleSpeedMod;
+        public float _spawnTime;
+        public float _currentSpawnTime;
+        public float _currentEagleSpeedMod;
 
         private List<WormController> _targets = new();
 
-        private void Awake()
-        {
-            gameManager.OnGameStart += StartSpawner;
-            gameManager.OnGameEnd += StopSpawner;
-        }
+        private bool _started;
 
         private void Start()
         {
-            _spawnTime = maxSpawnTime;
-            _currentSpawnTime = Mathf.Infinity;
+            _spawnTime = initialSpawnTime;
+            _currentSpawnTime = _spawnTime;
             _currentEagleSpeedMod = -eagleSpeedModIncreasedByLoop; //will be setted to zero on first spawn
+        }
+        
+        private void OnEnable()
+        {
+            gameManager.OnGameStart += StartSpawner;
+            gameManager.OnGameEnd += StopSpawner;
         }
 
         private void OnDisable()
@@ -50,11 +57,12 @@ namespace Managers
 
         private void Update()
         {
+            if (!_started) return;
+            
             _currentSpawnTime -= Time.deltaTime;
             if (_currentSpawnTime <= 0)
             {
                 SpawnEagle();
-                _spawnTime = Mathf.Clamp(_spawnTime - spawnTimeDecrease, minSpawnTime, maxSpawnTime);
                 _currentSpawnTime = _spawnTime;
             }
         }
@@ -67,7 +75,11 @@ namespace Managers
             var position = Random.Range(-10f, 10f);
             var eagle = Instantiate(eagleControllerPrefab, new Vector3(position, 6f, 0), Quaternion.identity);
             eagle.SetGameManager(gameManager);
-            eagle.Setup(5f, 1f + 1f * _currentEagleSpeedMod);
+
+            var speedMod = 1f + 1f * _currentEagleSpeedMod;
+            if (speedMod > eagleSpeedModMax)
+                speedMod = eagleSpeedModMax;
+            eagle.Setup(5f, speedMod);
             eagle.SetTarget(target.transform);
             eagle.MoveToTarget();
             
@@ -98,11 +110,25 @@ namespace Managers
 
         private void StartSpawner()
         {
-            _currentSpawnTime = _spawnTime;
+            _started = true;
+
+            StartCoroutine(IncreaseSpawnTimeRoutine());
+        }
+
+        private IEnumerator IncreaseSpawnTimeRoutine()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(spawnTimeDecreaseDelay);
+                _spawnTime -= spawnTimeDecrease;
+                if(_spawnTime < minSpawnTime)
+                    _spawnTime = minSpawnTime;
+            }
         }
 
         private void StopSpawner()
         {
+            StopAllCoroutines();
             gameObject.SetActive(false);
         }
     }
