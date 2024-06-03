@@ -930,7 +930,7 @@ MonoBehaviour:
   <WormSpawner>k__BackingField: {fileID: 764840732}
   endGameController: {fileID: 5815424928417879962}
   gamePresentation: {fileID: 1330746751}
-  skipPresentation: 1
+  skipPresentation: 0
 --- !u!1 &2031492709
 GameObject:
   m_ObjectHideFlags: 0
