@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Eagle;
@@ -25,16 +26,22 @@ namespace Managers
 
         private List<WormController> _targets = new();
 
+        private void Awake()
+        {
+            gameManager.OnGameStart += StartSpawner;
+            gameManager.OnGameEnd += StopSpawner;
+        }
+
         private void Start()
         {
             _spawnTime = maxSpawnTime;
-            _currentSpawnTime = _spawnTime;
+            _currentSpawnTime = Mathf.Infinity;
             _currentEagleSpeedMod = -eagleSpeedModIncreasedByLoop; //will be setted to zero on first spawn
-            gameManager.OnGameEnd += StopSpawner;
         }
 
         private void OnDisable()
         {
+            gameManager.OnGameStart -= StartSpawner;
             gameManager.OnGameEnd -= StopSpawner;
         }
 
@@ -82,6 +89,11 @@ namespace Managers
             } while (!target);
 
             return target;
+        }
+
+        private void StartSpawner()
+        {
+            _currentSpawnTime = _spawnTime;
         }
 
         private void StopSpawner()

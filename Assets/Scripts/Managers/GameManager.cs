@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Linq;
+using DG.Tweening;
 using UI;
 using UnityEngine;
 
@@ -8,12 +10,20 @@ namespace Managers
     {
         [field: SerializeField] public WormSpawner WormSpawner { get; private set; }
         [SerializeField] private EndGameController endGameController;
+        [SerializeField] private GamePresentation gamePresentation;
     
+        public event System.Action OnGameStart = delegate { };
         public event System.Action OnGameEnd = delegate { };
     
-        private void Start()
+        private IEnumerator Start()
         {
             SpawnWorms();
+            
+            yield return new WaitForSeconds(2f);
+            yield return gamePresentation.ShowPresentation().WaitForCompletion();
+            yield return new WaitForSeconds(2f);
+            gamePresentation.ShowTutorial();
+            OnGameStart();
         }
 
         private void SpawnWorms()
