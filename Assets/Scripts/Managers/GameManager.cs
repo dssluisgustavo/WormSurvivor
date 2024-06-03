@@ -26,6 +26,7 @@ namespace Managers
             
                 playerAlreadySpawned = true;
             }
+            WormSpawner.FixCharacterHUDOrder();
         }
 
         private void CheckWormDeath()
