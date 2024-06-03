@@ -86,10 +86,10 @@ namespace Worm
 
         private void DieAnimation()
         {
-            transform.localPosition = Vector3.zero;
+            transform.localPosition = _initialPosition;
             DOTween.Sequence()
-                .Append(transform.DOShakePosition(1f))
-                .Append(transform.DOLocalMove(Vector3.zero, .25f))
+                .Append(transform.DOShakePosition(1f, new Vector3(.25f, 0f, 0f)))
+                .Append(transform.DOLocalMove(_initialPosition, .25f))
                 .AppendCallback(() =>
                 {
                     if (_audioManager) 
