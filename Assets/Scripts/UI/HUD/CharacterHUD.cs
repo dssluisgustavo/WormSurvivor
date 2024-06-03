@@ -16,6 +16,7 @@ namespace UI.HUD
         {
             WormControllerReference = wormController;
 
+            characterName.text = wormController.WormName;
             healthHUD.Initialize(wormController.Health);
             staminaHUD.Initialize(wormController.Stamina);
         }
