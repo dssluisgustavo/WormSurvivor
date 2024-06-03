@@ -11,18 +11,23 @@ namespace Managers
         [field: SerializeField] public WormSpawner WormSpawner { get; private set; }
         [SerializeField] private EndGameController endGameController;
         [SerializeField] private GamePresentation gamePresentation;
-    
+        [SerializeField] private bool skipPresentation;
+        
         public event System.Action OnGameStart = delegate { };
         public event System.Action OnGameEnd = delegate { };
-    
+
         private IEnumerator Start()
         {
             SpawnWorms();
-            
-            yield return new WaitForSeconds(2f);
-            yield return gamePresentation.ShowPresentation().WaitForCompletion();
-            yield return new WaitForSeconds(2f);
-            gamePresentation.ShowTutorial();
+
+            if (!skipPresentation)
+            {
+                yield return new WaitForSeconds(2f);
+                yield return gamePresentation.ShowPresentation().WaitForCompletion();
+                yield return new WaitForSeconds(2f);
+                gamePresentation.ShowTutorial();
+            }
+
             OnGameStart();
         }
 
