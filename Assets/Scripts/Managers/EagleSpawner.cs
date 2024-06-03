@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Audio;
 using Eagle;
 using UnityEngine;
 using Worm;
@@ -18,7 +19,9 @@ namespace Managers
 
         [SerializeField] private float eagleSpeedModIncreasedByLoop = .25f;
 
-        [Header("References")] [SerializeField] private GameManager gameManager;
+        [Header("References")] 
+        [SerializeField] private GameManager gameManager;
+        [SerializeField] private AudioManager audioManager;
 
         private float _spawnTime;
         private float _currentSpawnTime;
@@ -67,6 +70,8 @@ namespace Managers
             eagle.Setup(5f, 1f + 1f * _currentEagleSpeedMod);
             eagle.SetTarget(target.transform);
             eagle.MoveToTarget();
+            
+            audioManager.PlayEagleSpawn();
         }
 
         private Transform ChooseTarget()

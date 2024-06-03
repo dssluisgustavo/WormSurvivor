@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Audio;
 using UI.HUD;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -14,6 +15,8 @@ namespace Managers
 
         [SerializeField] private GameObject characterPrefab;
         [SerializeField] private CharacterHUD characterHUDPrefab;
+
+        [SerializeField] private AudioManager audioManager;
 
         private List<WormController> worms = new();
         public WormController[] Worms => worms.ToArray();
@@ -40,6 +43,7 @@ namespace Managers
 
             var worm = character.GetComponentInChildren<WormController>();
             worm.IsCPU = isCPU;
+            worm.SetAudioManager(audioManager);
 
             WormInput wormInput;
             if (isCPU)
