@@ -55,7 +55,7 @@ namespace Managers
                 worm.SetWormName($"CPU - {worms.Count}");
 
                 wormInput = cpuObj.AddComponent<WormAI>();
-                ((WormAI)wormInput).Setup(2f);
+                ((WormAI)wormInput).Setup(2f, Random.Range(0f, .5f));
             }
             else
             {
