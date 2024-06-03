@@ -27,8 +27,6 @@ namespace Worm
         {
             _initialPosition = transform.localPosition;
             
-            Debug.Log("value: ");
-            Debug.Log(_audioManager);
             if(_audioManager)
                 Health.OnDamaged += _audioManager.PlayWormHit;
         }
