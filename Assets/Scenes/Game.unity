@@ -175,6 +175,7 @@ MonoBehaviour:
   spawnTimeDecrease: 0.1
   eagleSpeedModIncreasedByLoop: 0.1
   gameManager: {fileID: 2004285998}
+  audioManager: {fileID: 2031492712}
 --- !u!1 &347973615
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,6 +469,7 @@ MonoBehaviour:
   characterHUDParent: {fileID: 1279770827}
   characterPrefab: {fileID: 4246992858446486615, guid: 54352512ba35fc64aa7ca73cc34d96af, type: 3}
   characterHUDPrefab: {fileID: 5805267195061771808, guid: 66f6f2b0817a40a4c9909544b23ec54e, type: 3}
+  audioManager: {fileID: 2031492712}
 --- !u!1 &1084798243
 GameObject:
   m_ObjectHideFlags: 0
@@ -1569,9 +1571,9 @@ MonoBehaviour:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 2031492711}
   - {fileID: 389929344}
   - {fileID: 2004285997}
   - {fileID: 2042535452}
   - {fileID: 460695735}
   - {fileID: 1438476541}
-  - {fileID: 2031492711}

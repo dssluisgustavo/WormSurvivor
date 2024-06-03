@@ -1,4 +1,5 @@
 using System;
+using Audio;
 using DG.Tweening;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ namespace Worm
         [SerializeField] private float hideDuration = 0.1f;
         [SerializeField] private float unHideDuration = 0.3f;
         private Tween _currentTween;
+        private AudioManager _audioManager;
         public bool IsDead => Health.IsDead;
         public bool IsCPU { get; set; }
         public int SpotIndex { get; set; }
@@ -24,6 +26,11 @@ namespace Worm
         private void Start()
         {
             _initialPosition = transform.localPosition;
+            
+            Debug.Log("value: ");
+            Debug.Log(_audioManager);
+            if(_audioManager)
+                Health.OnDamaged += _audioManager.PlayWormHit;
         }
 
         private void OnEnable()
@@ -36,6 +43,8 @@ namespace Worm
         {
             Stamina.OnStaminaDepleted -= Unhide;
             Health.OnDeath -= DieAnimation;
+            if (_audioManager)
+                Health.OnDamaged -= _audioManager.PlayWormHit;
         }
 
         public void Hide()
@@ -83,6 +92,11 @@ namespace Worm
             DOTween.Sequence()
                 .Append(transform.DOShakePosition(1f))
                 .Append(transform.DOLocalMove(Vector3.zero, .25f))
+                .AppendCallback(() =>
+                {
+                    if (_audioManager) 
+                        _audioManager.PlayWormDie();
+                })
                 .Append(transform.DOLocalMove(_safePosition - new Vector3(0f, 5f), 1f));
         }
 
@@ -94,6 +108,11 @@ namespace Worm
         public void SetSpotIndex(int index)
         {
             SpotIndex = index;
+        }
+
+        public void SetAudioManager(AudioManager audioManager)
+        {
+            _audioManager = audioManager;
         }
     }
 }

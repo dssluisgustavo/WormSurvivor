@@ -14,6 +14,7 @@ namespace Worm
         [SerializeField] private SpriteRenderer spriteRenderer;
 
         public event Action<int> OnHealthChanged = delegate { };
+        public event Action OnDamaged = delegate { };
         public event Action OnDeath = delegate { };
 
         public bool IsDead { get; private set; }
@@ -43,6 +44,7 @@ namespace Worm
             FlashSprite();
 
             OnHealthChanged.Invoke(_currentHealth);
+            OnDamaged.Invoke();
         }
 
         public void Recover()
