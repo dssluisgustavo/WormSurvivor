@@ -93,7 +93,7 @@ namespace Worm
                 .AppendCallback(() =>
                 {
                     if (_audioManager) 
-                        _audioManager.PlayWormDie();
+                        _audioManager.PlayWormDeath();
                 })
                 .Append(transform.DOLocalMove(_safePosition - new Vector3(0f, 5f), 1f));
         }
