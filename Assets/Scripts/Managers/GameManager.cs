@@ -31,10 +31,10 @@ namespace Managers
         private void CheckWormDeath()
         {
             var worms = WormSpawner.Worms;
-            var wormsAlive = worms.Where(w => !w.IsDead);
+            var wormsAlive = worms.Where(w => !w.IsDead).ToArray();
             if (wormsAlive.Count() <= 1)
             {
-                var worm = worms.FirstOrDefault();
+                var worm = wormsAlive.FirstOrDefault();
                 endGameController.ShowWindow(worm?.WormName);
             
                 OnGameEnd();
