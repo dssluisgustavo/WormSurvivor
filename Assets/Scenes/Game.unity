@@ -170,12 +170,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eagleControllerPrefab: {fileID: 1463196176330558331, guid: 8ae04b98122678b4797efe64d8b3124d, type: 3}
-  maxSpawnTime: 3
-  minSpawnTime: 0.25
-  spawnTimeDecrease: 0.1
+  initialSpawnTime: 4
+  minSpawnTime: 1
+  spawnTimeDecrease: 0.5
+  spawnTimeDecreaseDelay: 5
   eagleSpeedModIncreasedByLoop: 0.1
+  eagleSpeedModMax: 3
   gameManager: {fileID: 2004285998}
   audioManager: {fileID: 2031492712}
+  _spawnTime: 0
+  _currentSpawnTime: 0
+  _currentEagleSpeedMod: 0
 --- !u!1 &347973615
 GameObject:
   m_ObjectHideFlags: 0
