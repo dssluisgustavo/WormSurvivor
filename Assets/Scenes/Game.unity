@@ -1065,10 +1065,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 278f8fe75d1d81140be161a74e1a6bb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  click: {fileID: 0}
-  eagleSpawn: {fileID: 0}
-  wormHit: {fileID: 0}
-  wormDie: {fileID: 0}
+  click: {fileID: 8300000, guid: 3c405b19b9578734e97e003fc0d4ff37, type: 3}
+  eagleSpawn: {fileID: 8300000, guid: 0289d479f26a7214f8120631753135a3, type: 3}
+  wormHit: {fileID: 8300000, guid: f2d225d147e1eea43b556c4dea55c615, type: 3}
+  wormDie: {fileID: 8300000, guid: 322b4926e269615449f20e1ad28f0bcc, type: 3}
 --- !u!1 &2042535448
 GameObject:
   m_ObjectHideFlags: 0
