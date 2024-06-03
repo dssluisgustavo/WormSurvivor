@@ -10,17 +10,18 @@ public class WormAnimation : MonoBehaviour
     [SerializeField]private SpriteRenderer spriteRenderer;
 
     private Tween _animationTween;
+    private Tween _animationTween2;
     
     void Start()
     {
-        DOTween.Sequence()
+        _animationTween = DOTween.Sequence()
             .Append(spriteRenderer.transform.DOScaleY(0.9f, .25f))
             .Append(spriteRenderer.transform.DOScaleY(1f, .25f))
             .SetLoops(-1);
 
         var side = Random.Range(-1, 2);
         if (side == 0) side = 1;
-        _animationTween = DOTween.Sequence()
+        _animationTween2 = DOTween.Sequence()
             .AppendCallback(() =>
             {
                 side *= -1;
@@ -31,5 +32,6 @@ public class WormAnimation : MonoBehaviour
     private void OnDestroy()
     {
         _animationTween.Kill();
+        _animationTween2.Kill();
     }
 }
