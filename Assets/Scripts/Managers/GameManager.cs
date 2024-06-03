@@ -50,10 +50,10 @@ namespace Managers
             var wormsAlive = worms.Where(w => !w.IsDead).ToArray();
             if (wormsAlive.Count() <= 1)
             {
+                OnGameEnd();
+                
                 var worm = wormsAlive.FirstOrDefault();
                 endGameController.ShowWindow(worm?.WormName);
-            
-                OnGameEnd();
             }
         }
     }
