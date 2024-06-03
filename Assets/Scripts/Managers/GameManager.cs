@@ -21,8 +21,9 @@ namespace Managers
             
             yield return new WaitForSeconds(2f);
             yield return gamePresentation.ShowPresentation().WaitForCompletion();
-            
-            //show instructions
+            yield return new WaitForSeconds(2f);
+            gamePresentation.ShowTutorial();
+            OnGameStart();
         }
 
         private void SpawnWorms()

@@ -8,6 +8,7 @@ namespace UI
     {
         [SerializeField] private Image panel;
         [SerializeField] private RectTransform textRect;
+        [SerializeField] private RectTransform tutorialRect;
 
         private Tween _currentTween;
     
@@ -15,24 +16,34 @@ namespace UI
         {
             if(_currentTween == null)
                 _currentTween.Kill();
-        
+            
+            textRect.localScale = Vector3.zero;
+
             _currentTween = DOTween.Sequence()
-                .Append(textRect.DOScale(Vector3.zero, 0f))
                 .Append(panel.DOFade(.9f, .25f))
-                .Append(textRect.DOScale(Vector3.one, .5f))
-                .Append(GetTextAnimationTween())
-                .Append(textRect.DOScale(Vector3.zero, .5f))
+                .Append(GetTextAnimationTween(textRect, 5))
                 .Append(panel.DOFade(0f, .25f));
 
             return _currentTween;
         }
 
-        private Tween GetTextAnimationTween()
+        public Tween ShowTutorial()
+        {
+            tutorialRect.localScale = Vector3.zero;
+            return GetTextAnimationTween(tutorialRect, 8, .99f);
+        }
+
+        private Tween GetTextAnimationTween(RectTransform rect, int loops, float targetSize = .95f)
         {
             return DOTween.Sequence()
-                .Append(textRect.DOScale(new Vector3(.95f, .95f), .25f))
-                .Append(textRect.DOScale(Vector3.one, .25f))
-                .SetLoops(5);
+                .Append(rect.DOScale(Vector3.one, .5f))
+                .Append(
+                    DOTween.Sequence()
+                        .Append(rect.DOScale(new Vector3(targetSize, targetSize), .25f))
+                        .Append(rect.DOScale(Vector3.one, .25f))
+                        .SetLoops(loops)
+                    )
+                .Append(rect.DOScale(Vector3.zero, .5f));
         }
     }
 }
